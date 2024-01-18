@@ -1,12 +1,16 @@
 import type { PostWithData } from '@/db/queries/posts';
 import Link from 'next/link';
 import paths from '@/paths';
+import { Button } from '@nextui-org/react';
+
 
 interface PostListProps {
   fetchData: () => Promise<PostWithData[]>;
 }
 
 export default async function PostList({ fetchData }: PostListProps) {
+
+
   const posts = await fetchData();
 
   const renderedPosts = posts.map((post) => {
@@ -15,6 +19,7 @@ export default async function PostList({ fetchData }: PostListProps) {
     if (!topicSlug) {
       throw new Error('Need a slug to link to a post');
     }
+
 
     return (
       <div key={post.id} className="border rounded p-2">
@@ -27,6 +32,8 @@ export default async function PostList({ fetchData }: PostListProps) {
             </p>
           </div>
         </Link>
+        
+
       </div>
     );
   });
